@@ -1,11 +1,11 @@
 {
-    "name": "spatie/skeleton",
-    "description": "package_description",
+    "name": "tallandsassy/page-guide",
+    "description": "",
     "keywords": [
-        "vendor_name",
-        "package_name"
+        "tallandsassy",
+        "page-guide"
     ],
-    "homepage": "https://github.com/vendor_name/package_name",
+    "homepage": "https://github.com/tallandsassy/page-guide",
     "license": "MIT",
     "authors": [
         {
@@ -28,13 +28,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Skeleton\\": "src",
-            "Spatie\\Skeleton\\Database\\Factories\\": "database/factories"
+            "TallAndSassy\\PageGuide\\": "src",
+            "TallAndSassy\\PageGuide\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Skeleton\\Tests\\": "tests"
+            "TallAndSassy\\PageGuide\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -49,10 +49,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\Skeleton\\SkeletonServiceProvider"
+                "TallAndSassy\\PageGuide\\PageGuideServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "Spatie\\Skeleton\\SkeletonFacade"
+                "PageGuide": "TallAndSassy\\PageGuide\\PageGuideFacade"
             }
         }
     },

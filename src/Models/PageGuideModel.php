@@ -1,14 +1,14 @@
 <?php
 
-namespace Spatie\Skeleton\Models;
+namespace TallAndSassy\PageGuide\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SkeletonModel extends Model
+class PageGuideModel extends Model
 {
     public $gaurded = [];// Defualt to no mass assignements
     public $fillable = ['name'];
-    public $table = 'skeleton';
+    public $table = 'page-guide';
 
     public function getUpperCasedName() : string
     {

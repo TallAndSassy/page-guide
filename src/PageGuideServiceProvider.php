@@ -1,35 +1,35 @@
 <?php
 
-namespace Spatie\Skeleton;
+namespace TallAndSassy\PageGuide;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Spatie\Skeleton\Commands\SkeletonCommand;
-use Spatie\Skeleton\Http\Controllers\SkeletonController;
+use TallAndSassy\PageGuide\Commands\PageGuideCommand;
+use TallAndSassy\PageGuide\Http\Controllers\PageGuideController;
 
-class SkeletonServiceProvider extends ServiceProvider
+class PageGuideServiceProvider extends ServiceProvider
 {
-    public static string $blade_prefix = "bladeprefix"; #bladeprefix is a template term
-    
+    public static string $blade_prefix = "tassy"; #tassy is a template term
+
     public function boot()
     {
         if ($this->app->runningInConsole()) {
             $this->publishes(
                 [
-                    __DIR__ . '/../config/skeleton.php' => config_path('skeleton.php'),
+                    __DIR__ . '/../config/page-guide.php' => config_path('page-guide.php'),
                 ],
                 'config'
             );
 
             $this->publishes(
                 [
-                    __DIR__ . '/../resources/views' => base_path('resources/views/vendor/skeleton'),
+                    __DIR__ . '/../resources/views' => base_path('resources/views/vendor/page-guide'),
                 ],
                 'views'
             );
 
-            $migrationFileName = 'create_skeleton_table.php';
+            $migrationFileName = 'create_page_guide_table.php';
             if (! $this->migrationFileExists($migrationFileName)) {
                 $this->publishes(
                     [
@@ -42,34 +42,38 @@ class SkeletonServiceProvider extends ServiceProvider
             }
 
              $this->publishes([
-                 __DIR__.'/../resources/public' => public_path('eleganttechnologies/grok'),
+                 __DIR__.'/../resources/public' => public_path('tallandsassy'),
                 ], ['public']);
+
+
 
             // Publishing assets.
             /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('spatie/skeleton'),
+                __DIR__.'/../resources/assets' => public_path('tallandsassy/page-guide'),
             ], 'grok.views');*/
 
             // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/spatie/skeleton'),
-            ], 'grok.views');*/
+            $this->publishes([
+                __DIR__.'/../resources/lang' => resource_path('lang/tassy/page-guide'),
+            ], 'grok.views');
 
 
 
             // Registering package commands.
             $this->commands(
                 [
-                    SkeletonCommand::class,
+                    PageGuideCommand::class,
                 ]
             );
         }
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'bladeprefix');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tassy');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tassy');
+        
 
 
         Route::macro(
-            'bladeprefix',
+            'tassy',
             function (string $prefix) {
                 Route::prefix($prefix)->group(
                     function () {
@@ -78,24 +82,24 @@ class SkeletonServiceProvider extends ServiceProvider
                         if (App::environment(['local', 'testing'])) {
                             // prefixed url to string
                             Route::get(
-                                '/Spatie/Skeleton/sample_string', // you will absolutely need a prefix in your url
+                                '/TallAndSassy/PageGuide/sample_string', // you will absolutely need a prefix in your url
                                 function () {
-                                    return "Hello Skeleton string via blade prefix";
+                                    return "Hello PageGuide string via blade prefix";
                                 }
                             );
 
                             // prefixed url to blade view
                             Route::get(
-                                '/Spatie/Skeleton/sample_blade',
+                                '/TallAndSassy/PageGuide/sample_blade',
                                 function () {
-                                    return view('bladeprefix::sample_blade');
+                                    return view('tassy::sample_blade');
                                 }
                             );
 
                             // prefixed url to controller
                             Route::get(
-                                '/Spatie/Skeleton/controller',
-                                [SkeletonController::class, 'sample']
+                                '/TallAndSassy/PageGuide/controller',
+                                [PageGuideController::class, 'sample']
                             );
                         }
                         // Prefix Route Samples -END-
@@ -105,31 +109,31 @@ class SkeletonServiceProvider extends ServiceProvider
                 );
             }
         );
-        Route::bladeprefix('bladeprefix'); // This works. http://test-jet.test/bladeprefix/Spatie/Skeleton/string
-        // They are addatiive, so in your own routes/web.php file, do Route::bladeprefix('staff'); to
-        // make http://test-jet.test/staff/Spatie/Skeleton/string work
+        Route::tassy('tassy'); // This works. http://test-jet.test/tassy/TallAndSassy/PageGuide/string
+        // They are addatiive, so in your own routes/web.php file, do Route::tassy('staff'); to
+        // make http://test-jet.test/staff/TallAndSassy/PageGuide/string work
 
 
         // global url samples -BEGIN-
         if (App::environment(['local', 'testing'])) {
             // global url to string
             Route::get(
-                '/grok/Spatie/Skeleton/sample_string',
+                '/grok/TallAndSassy/PageGuide/sample_string',
                 function () {
-                    return "Hello Skeleton string via global url.";
+                    return "Hello PageGuide string via global url.";
                 }
             );
 
             // global url to blade view
             Route::get(
-                '/grok/Spatie/Skeleton/sample_blade',
+                '/grok/TallAndSassy/PageGuide/sample_blade',
                 function () {
-                    return view('bladeprefix::sample_blade');
+                    return view('tassy::sample_blade');
                 }
             );
 
             // global url to controller
-            Route::get('/grok/Spatie/Skeleton/controller', [SkeletonController::class, 'sample']);
+            Route::get('/grok/TallAndSassy/PageGuide/controller', [PageGuideController::class, 'sample']);
         }
         // global url samples -END-
 
@@ -137,10 +141,10 @@ class SkeletonServiceProvider extends ServiceProvider
 
         // GROK
         if (App::environment(['local', 'testing'])) {
-            \ElegantTechnologies\Grok\GrokWrangler::grokMe(static::class, 'Spatie', 'skeleton', 'resources/views/grok', 'bladeprefix');//bladeprefix gets macro'd out
-            Route::get('/grok/Spatie/Skeleton', fn () => view('bladeprefix::grok/index'));
+            \ElegantTechnologies\Grok\GrokWrangler::grokMe(static::class, 'TallAndSassy', 'page-guide', 'resources/views/grok', 'tassy');//tassy gets macro'd out
+            Route::get('/grok/TallAndSassy/PageGuide', fn () => view('tassy::grok/index'));
         }
-        
+
         // TODO: Register your livewire components that live in this package here:
         # \Livewire\Livewire::component('tassygroklivewirejet::a-a-nothing',  \TallAndSassy\GrokLivewireJet\Components\DemoUiChunks\AANothing::class);
         // TODO: Add your own other boot related stuff here...
@@ -148,7 +152,7 @@ class SkeletonServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/skeleton.php', 'skeleton');
+        $this->mergeConfigFrom(__DIR__ . '/../config/page-guide.php', 'page-guide');
     }
 
     public static function migrationFileExists(string $migrationFileName): bool

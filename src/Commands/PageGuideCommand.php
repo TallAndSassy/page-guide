@@ -1,21 +1,21 @@
 <?php
 
-namespace Spatie\Skeleton\Commands;
+namespace TallAndSassy\PageGuide\Commands;
 
 use Illuminate\Console\Command;
 
 /* This original file is a template.  Feel free to copy and rename, as needed.
 For each 'Command' in this directory, there should be a corresponding
-entry in src/SkeletonServiceProvider.php/boot/this->commands([...
+entry in src/PageGuideServiceProvider.php/boot/this->commands([...
 
 
 */
 
-class SkeletonCommand extends Command
+class PageGuideCommand extends Command
 {
-    public $signature = 'bladeprefix:somecommand'; # Hint: The ':' groups the command under a similiar heading.
+    public $signature = 'tassy:somecommand'; # Hint: The ':' groups the command under a similiar heading.
 
-    public $description = 'Default description for Spatie/Skeleton command';
+    public $description = 'Default description for TallAndSassy/PageGuide command';
 
     public $help = <<<EOD
     Sample: Your extendended instructions goes here.
@@ -24,6 +24,6 @@ class SkeletonCommand extends Command
     
     public function handle()
     {
-        $this->comment('Spatie/Skeleton/hw/tbd');
+        $this->comment('TallAndSassy/PageGuide/hw/tbd');
     }
 }
