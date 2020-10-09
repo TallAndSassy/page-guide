@@ -2,6 +2,7 @@
     <x-slot name="title">
         Admin Default
     </x-slot>
-    Admin stuff
+    <div class="">Menu ->] </div>
+    Admin Body
 
 </x-tassy::page-admin>

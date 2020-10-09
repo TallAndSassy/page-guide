@@ -113,7 +113,13 @@
 
      <div class="flex flex-col justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8">
         <div class="absolute top-0 right-0 mt-4 mr-4">
-            @if (Route::has('login'))
+            @foreach (\TallAndSassy\PageGuide\PageGuideMenuWranglerFront::wranglees() as $asrMenuPackage)
+                <a id="navbarDropdown" class="nav-link  inline-block font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150" href="{{$asrMenuPackage['url']}}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <span>{{$asrMenuPackage['name']}}</span>
+                </a>
+
+            @endforeach
+            {{-- @if (Route::has('login'))
                 <div class="space-x-4">
                     @auth
                         <a id="navbarDropdown" class="nav-link  inline-block font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150" href="/me" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -121,6 +127,7 @@
                         <span>{{__('tassy::PageGuide.MeLinkText')}}</span>
 
                     </a>
+
 
                         <a
                             href="{{ route('logout') }}"
@@ -142,6 +149,7 @@
                     @endauth
                 </div>
             @endif
+            --}}
         </div>
 
 

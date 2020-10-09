@@ -20,10 +20,16 @@ You can install the package via composer:
 composer require tallandsassy/page-guide
 ```
 
-Update your routes/web.php file (TODO: Make this automatical)
 
 ```php
+# in routes/web.php
 require_once(base_path('vendor/tallandsassy/page-guide/routes/web.php'));
+
+# in app/Providers/RouteServiceProvider.php
+# Change
+    public const HOME = '/dashboard';
+  # -to- 
+    public const HOME = '/me';
 ```
 
 
