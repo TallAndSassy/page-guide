@@ -1,0 +1,3 @@
+<div>
+    Front Footer
+</div>

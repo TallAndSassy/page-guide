@@ -21,9 +21,9 @@
     </head>
     <body class="font-sans antialiased">
         <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <x-tassy::page-_base-body>
+              {{ $slot }}
+            </x-tassy::page-_base-body>
         @stack('modals')
 
         @livewireScripts
