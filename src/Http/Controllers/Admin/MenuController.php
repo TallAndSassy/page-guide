@@ -6,6 +6,7 @@ class MenuController
 {
     public static function boot()
     {
+        // inappropriated handled in routes/web.php
 //        $isLoggedIn = (\Illuminate\Support\Facades\Auth::user()) ? true : false;
 //        assert($isLoggedIn);
 //
