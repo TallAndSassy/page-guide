@@ -1,6 +1,6 @@
 <div class="
-    tassy::page-guide-components-menu-meadmin
-    absolute top-0 right-0 mt-4 mr-4
+    tassy::page-guide-components-header-back-menu
+    absolute top-0 right-0
     flex">
 
     @foreach (\TallAndSassy\PageGuide\PageGuideMenuWranglerFront::wranglees() as $asrMenuPackage)

@@ -9,7 +9,7 @@ class MenuController
         $isLoggedIn = (\Illuminate\Support\Facades\Auth::user()) ? true : false;
         assert($isLoggedIn);
 
-        \TallAndSassy\PageGuide\PageGuideMenuWranglerAdmin::wrangleMe(
+        \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
             "admin",
             [
                 'name' => __('tassy::PageGuide.AdminLinkText'),
@@ -19,7 +19,7 @@ class MenuController
             ]
         );
 
-        \TallAndSassy\PageGuide\PageGuideMenuWranglerAdmin::wrangleMe(
+        \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
             "me",
             [
                 'name' => __('tassy::PageGuide.MeLinkText'),
@@ -31,15 +31,15 @@ class MenuController
         );
 
 
-        \TallAndSassy\PageGuide\PageGuideMenuWranglerAdmin::wrangleMe(
-            "log-out",
-            [
-                'name' => "Log Out",
-                "url" => route('logout'),
-                "classes" => "",
-                "routeIs" => "logout*"
-            ]
-        );
+//        \TallAndSassy\PageGuide\PageGuideMenuWranglerAdmin::wrangleMe(
+//            "log-out",
+//            [
+//                'name' => "Log Out",
+//                "url" => route('logout'),
+//                "classes" => "",
+//                "routeIs" => "logout*"
+//            ]
+//        );
     }
 
 }
