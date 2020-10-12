@@ -18,6 +18,8 @@ class MenuController
                 ]
             );
 
+        // FYI: 10/20' -
+
         //            \TallAndSassy\PageGuide\PageGuideMenuWranglerFront::wrangleMe(
             //                "log-out",
             //                [
@@ -37,6 +39,18 @@ class MenuController
                     "routeIs" => "login*",
                 ]
             );
+
+            if (config('page-guide.canSelfRegister')) {
+                \TallAndSassy\PageGuide\PageGuideMenuWranglerFront::wrangleMe(
+                    "register",
+                    [
+                        'name' => "Register",
+                        "url" => route('register'),
+                        "classes" => "",
+                        "routeIs" => "register*",
+                    ]
+                );
+            }
         }
     }
 }

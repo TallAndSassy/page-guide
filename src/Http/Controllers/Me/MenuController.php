@@ -15,7 +15,7 @@ class MenuController
                 'name' => __('tassy::PageGuide.AdminLinkText'),
                 "url" => "/admin",
                 "classes" => "",
-                "routeIs" => "admin*"
+                "routeIs" => "admin*",
             ]
         );
 
@@ -25,7 +25,7 @@ class MenuController
                 'name' => __('tassy::PageGuide.MeLinkText'),
                 "url" => "/me",
                 "classes" => "",
-                "routeIs" => "me*"
+                "routeIs" => "me*",
 
             ]
         );
@@ -41,5 +41,4 @@ class MenuController
 //            ]
 //        );
     }
-
 }
