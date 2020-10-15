@@ -69,7 +69,7 @@ class PageGuideServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tassy');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tassy');
-        
+
 
 
         Route::macro(
@@ -148,6 +148,7 @@ class PageGuideServiceProvider extends ServiceProvider
         // TODO: Register your livewire components that live in this package here:
         # \Livewire\Livewire::component('tassygroklivewirejet::a-a-nothing',  \TallAndSassy\GrokLivewireJet\Components\DemoUiChunks\AANothing::class);
         // TODO: Add your own other boot related stuff here...
+         \Livewire\Livewire::component('tassy::livewire.sidenav',  \TallAndSassy\PageGuide\Components\Sidenav::class);
     }
 
     public function register()
