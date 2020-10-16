@@ -32,36 +32,35 @@ $isBackPage = \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isBa
 
 if ($isBackPage) {
     \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
-            "home",
-            [
+        "home",
+        [
                 'name' => __('tassy::PageGuide.FrontLinkText'),
                 "url" => "/",
                 "classes" => "",
                 "routeIs" => "home*",
             ]
-        );
+    );
 
     \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
-            "admin",
-            [
+        "admin",
+        [
                 'name' => __('tassy::PageGuide.AdminLinkText'),
                 "url" => "/admin",
                 "classes" => "",
                 "routeIs" => "admin*",
             ]
-        );
+    );
 
-        \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
-            "me",
-            [
+    \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
+        "me",
+        [
                 'name' => __('tassy::PageGuide.MeLinkText'),
                 "url" => "/me",
                 "classes" => "",
                 "routeIs" => "me*",
 
             ]
-        );
-
+    );
 }
 //
 //// Add menus when on back end.  There must be a better way.
