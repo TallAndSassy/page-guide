@@ -28,28 +28,63 @@ Route::middleware(['auth:sanctum', 'verified'])->get(
 )->name('me');
 
 
+$isBackPage = \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isBackPage();
 
-// Add menus when on back end.  There must be a better way.
-#$isBackBound = in_array(explode('/', request()->getPathInfo())[1], ['user','teams','me','admin','user']);
-        if (\TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isBackPage()) {
-            \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
-                "admin",
-                [
+if ($isBackPage) {
+    \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
+            "home",
+            [
+                'name' => __('tassy::PageGuide.FrontLinkText'),
+                "url" => "/",
+                "classes" => "",
+                "routeIs" => "home*",
+            ]
+        );
+
+    \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
+            "admin",
+            [
                 'name' => __('tassy::PageGuide.AdminLinkText'),
                 "url" => "/admin",
                 "classes" => "",
                 "routeIs" => "admin*",
             ]
-            );
+        );
 
-            \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
-                "me",
-                [
+        \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
+            "me",
+            [
                 'name' => __('tassy::PageGuide.MeLinkText'),
                 "url" => "/me",
                 "classes" => "",
                 "routeIs" => "me*",
 
             ]
-            );
-        }
+        );
+
+}
+//
+//// Add menus when on back end.  There must be a better way.
+//#$isBackBound = in_array(explode('/', request()->getPathInfo())[1], ['user','teams','me','admin','user']);
+//        if (\TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isBackPage()) {
+//            \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
+//                "admin",
+//                [
+//                'name' => __('tassy::PageGuide.AdminLinkText'),
+//                "url" => "/admin",
+//                "classes" => "",
+//                "routeIs" => "admin*",
+//            ]
+//            );
+//
+//            \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
+//                "me",
+//                [
+//                'name' => __('tassy::PageGuide.MeLinkText'),
+//                "url" => "/me",
+//                "classes" => "",
+//                "routeIs" => "me*",
+//
+//            ]
+//            );
+//        }
