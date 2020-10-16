@@ -30,8 +30,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get(
 
 
 // Add menus when on back end.  There must be a better way.
-$isBackBound = in_array(explode('/', request()->getPathInfo())[1], ['user','teams','me','admin','user']);
-        if ($isBackBound) {
+#$isBackBound = in_array(explode('/', request()->getPathInfo())[1], ['user','teams','me','admin','user']);
+        if (\TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isBackPage()) {
             \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
                 "admin",
                 [
