@@ -57,7 +57,7 @@
 @endphp
 <!-- Sidebar component, swap this element with another sidebar if you like -->
 
-    <nav class="hidden md:flex md:flex-1 px-2 py-4 bg-gray-800">
+    <nav class=" flex flex-1 px-2 py-4 bg-gray-800">
 
         <style>
             /* Do not show > reveal */

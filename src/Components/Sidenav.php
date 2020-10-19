@@ -20,7 +20,7 @@ class Sidenav extends Component
         // 8/20' Known Issue: Calls close() twice.  Everything is always getting closed twice.
         return <<<EOD
         wire:click="\$emit('pageRoute','$url')"
-        x-on:click.prevent="urlChange('$url');close();"
+        x-on:click.prevent="maybeCloseAdminMenu(); urlChange('$url');close(); "
         href="{$url}"
         EOD;
     }

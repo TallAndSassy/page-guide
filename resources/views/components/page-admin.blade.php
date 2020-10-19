@@ -5,7 +5,7 @@
 
     <!-- Static sidebar for desktop -->
     <div class="flex flex-shrink-0">
-asdfasdf
+
         <div class="h-0 flex-1 flex flex-col overflow-y-auto">
             <div class="flex-1 bg-gray-800">
                 {{--                        @livewire('sidenav')--}}
