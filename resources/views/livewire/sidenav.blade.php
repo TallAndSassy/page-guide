@@ -23,7 +23,7 @@
 
     // JJ - How can you make these common without perculating up the heirarchy?  Simple includes hide varaibles.
              $liWrapper_1 = $liWrapper_2 = ' pr-0 ';
-             $liWrapper_3 = ' pr-1 pl-0  ';  // feels like should be below, not in li
+             $liWrapper_3 = ' pr-1 pl-2  ';  // feels like should be below, not in li
 
              $linkFontColor_cssClasses = 'text-gray-300';
              $linkFocus_cssClasses = ' group flex pr-1 pl-2 rounded-md focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150';
@@ -34,13 +34,13 @@
              $divNode_cssClasses     = "$linkFontColor_cssClasses        $linkFocus_cssClasses no-underline group flex items-center px-2 py-2 text-lg leading-5 font-bold   ";
 
              $firstLeaf_cssClasses   = "$linkFontColor_cssClasses        $linkFocus_cssClasses p-2 text-lg leading-5 font-bold    ";
-             $firstLeafText_cssClasses = "hidden lg:block";
-             $secondLeaf_cssClasses  = "$linkFontColor_cssClasses        $linkFocus_cssClasses group flex items-center px-2 py-1 text-sm leading-5 rounded-md  ";
-             $secondBreak_cssClasses = "$placeholderFontColor_cssClasses ml-1.5 text-base font-bold ";
-             $thirdLeaf_cssClasses   = "$linkFontColor_cssClasses        $linkFocus_cssClasses ml-1 xl:ml-5  ";
-             $icon_cssClasses = "md:block lg:hidden xl:block topLevelNavIcon w-6 h-6 xl:mr-3 $placeholderFontColor_cssClasses ";
+             $firstLeafText_cssClasses = "pl-2 pt-0.5";
+             $secondLeaf_cssClasses  = "$linkFontColor_cssClasses        $linkFocus_cssClasses group flex items-center ml-8 px-2 py-1 text-sm leading-5 rounded-md  ";
+             $secondBreak_cssClasses = "$placeholderFontColor_cssClasses ml-10   text-base font-bold ";
+             $thirdLeaf_cssClasses   = "$linkFontColor_cssClasses        $linkFocus_cssClasses ml-13  ";
+             $icon_cssClasses = "topLevelNavIcon w-6 h-6  $placeholderFontColor_cssClasses ";
              $jDetails_summary_cssClasses = "jDetails_summary  $divNode_cssClasses cursor-pointer";
-             $jDetails_body_cssClasses = 'ml-0 lg:ml-1 xl:ml-11';
+             $jDetails_body_cssClasses = 'ml-0 ';
 
              // Goes inside <a > to make it linky'  Doesn't include classes.  I had trouble parameterizing full html link
              /*function fancylinkInA(string $url) {
@@ -57,7 +57,7 @@
 @endphp
 <!-- Sidebar component, swap this element with another sidebar if you like -->
 
-    <nav class="hidden md:flex md:flex-1 px-2 py-4 bg-gray-800 lg:w-36 xl:w-56">
+    <nav class="hidden md:flex md:flex-1 px-2 py-4 bg-gray-800">
 
         <style>
             /* Do not show > reveal */
@@ -72,6 +72,19 @@
 
 
         <ul class="">
+{{--             @foreach (\TallAndSassy\PageGuide\PageGuideAdminWranglerBottom::wranglees() as $key=>$asrOrClosure)--}}
+{{--             <li class='{{$liWrapper_1}} '>--}}
+{{--                <a {!! fancyLinkInA($asrOrClosure['url']) !!}--}}
+{{--                   class="{{$firstLeaf_cssClasses}}"--}}
+
+{{--                >--}}
+{{--                    <x-heroicon-o-question-mark-circle class="{{$icon_cssClasses}}"--}}
+{{--                                                       stroke="currentColor"/>--}}
+{{--                    <span class=" {{$firstLeafText_cssClasses}}">{{$asrOrClosure['name']}}</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--            @endforeach--}}
+
             <li class='{{$liWrapper_1}} '>
 
                 <a
@@ -105,7 +118,7 @@
                             <li><a class="{{$thirdLeaf_cssClasses}}" {!! fancyLinkInA('/admin/seasons') !!}>Seasons</a>
                             </li>
                             <li><a class="{{$thirdLeaf_cssClasses}}" {!! fancyLinkInA('/admin/school_calendars') !!}>School
-                                    Calendars</a></li>
+                                    Calendars Here</a></li>
                         </ul>
                     </div>
                 </details>
@@ -177,13 +190,24 @@
             <li class='{{$liWrapper_1}} '>
                 <a {!! fancyLinkInA('/admin/help/issue/passwordReset') !!}
                    class="{{$firstLeaf_cssClasses}}"
-
                 >
                     <x-heroicon-o-question-mark-circle class="{{$icon_cssClasses}}"
                                                        stroke="currentColor"/>
                     <span class=" {{$firstLeafText_cssClasses}}">Help</span>
                 </a>
             </li>
+            @foreach (\TallAndSassy\PageGuide\PageGuideAdminWranglerTop::wranglees() as $key=>$asrOrClosure)
+             <li class='{{$liWrapper_1}} '>
+                <a {!! fancyLinkInA($asrOrClosure['url']) !!}
+                   class="{{$firstLeaf_cssClasses}}"
+
+                >
+                    <x-heroicon-o-question-mark-circle class="{{$icon_cssClasses}}"
+                                                       stroke="currentColor"/>
+                    <span class=" {{$firstLeafText_cssClasses}}">{{$asrOrClosure['name']}}</span>
+                </a>
+            </li>
+            @endforeach
 
 
         </ul>

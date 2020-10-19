@@ -5,14 +5,15 @@
 
     <!-- Static sidebar for desktop -->
     <div class="flex flex-shrink-0">
-        <livewire:tassy::livewire.sidenav/>
+asdfasdf
         <div class="h-0 flex-1 flex flex-col overflow-y-auto">
             <div class="flex-1 bg-gray-800">
                 {{--                        @livewire('sidenav')--}}
-
+{{-- <livewire:tassy::livewire.sidenav/>--}}
             </div>
             <div class="flex-shrink-0 flex bg-gray-700 align-bottom">
                 {{--                        @livewire('lowernav')--}}
+{{--                <livewire:tassy::livewire.lowernav/>--}}
             </div>
         </div>
     </div>

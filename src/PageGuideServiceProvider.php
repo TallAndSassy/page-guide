@@ -149,6 +149,7 @@ class PageGuideServiceProvider extends ServiceProvider
         # \Livewire\Livewire::component('tassygroklivewirejet::a-a-nothing',  \TallAndSassy\GrokLivewireJet\Components\DemoUiChunks\AANothing::class);
         // TODO: Add your own other boot related stuff here...
          \Livewire\Livewire::component('tassy::livewire.sidenav',  \TallAndSassy\PageGuide\Components\Sidenav::class);
+         \Livewire\Livewire::component('tassy::livewire.lowernav',  \TallAndSassy\PageGuide\Components\Lowernav::class);
     }
 
     public function register()
