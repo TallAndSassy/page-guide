@@ -1,7 +1,7 @@
 @php
 
     // JJ - How can you make these common without perculating up the heirarchy?  Simple includes hide varaibles.
-             $liWrapper_1 = $liWrapper_2 = 'pr-1 pb-1';
+          /*   $liWrapper_1 = $liWrapper_2 = 'pr-1 pb-1';
              $liWrapper_3 = ' pr-1 -ml-2 pl-2  ';  // feels like should be below, not in li
 
              $linkFontColor_cssClasses = 'text-gray-300';
@@ -20,12 +20,15 @@
              $jDetails_summary_cssClasses = "jDetails_summary cursor-pointer $divNode_cssClasses";
              $jDetails_body_cssClasses = 'ml-11';
 
- $firstLeafText_cssClasses = "hidden lg:block";
+ $firstLeafText_cssClasses = "hidden lg:block";*/
 @endphp
 
+
+
 <div>
-    <nav>
-        <ul class="">
+     {!!  \TallAndSassy\PageGuide\MenuTree::singleton('lower')->getHtml();!!}
+{{--    <nav>--}}
+{{--        <ul class="">--}}
 {{--            @foreach (\TallAndSassy\PageGuide\PageGuideAdminWranglerBottom::wranglees() as $key=>$asrOrClosure)--}}
 {{--            <li class='{{$liWrapper_1}} '>--}}
 
@@ -74,15 +77,15 @@
 {{--                    <span class="">About</span>--}}
 {{--                </a>--}}
 {{--            </li>--}}
-            @foreach (\TallAndSassy\PageGuide\PageGuideAdminWranglerBottom::wranglees() as $key=>$asrOrClosure)
-                <li class='{{$liWrapper_1}} '>
-                <a {!! fancyLinkInA($asrOrClosure['url']) !!}
-                   class="{{$firstLeaf_cssClasses}}"
-                >
-                    <x-heroicon-o-cog class="{{$icon_cssClasses}}" stroke="currentColor"/>
-                    <span class="">{{$asrOrClosure['name']}}</span>
-                </a>
-            </li>
+{{--            @foreach (\TallAndSassy\PageGuide\PageGuideAdminWranglerBottom::wranglees() as $key=>$asrOrClosure)--}}
+{{--                <li class='{{$liWrapper_1}} '>--}}
+{{--                <a {!! fancyLinkInA($asrOrClosure['url']) !!}--}}
+{{--                   class="{{$firstLeaf_cssClasses}}"--}}
+{{--                >--}}
+{{--                    <x-heroicon-o-cog class="{{$icon_cssClasses}}" stroke="currentColor"/>--}}
+{{--                    <span class="">{{$asrOrClosure['name']}}</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 {{--            <li class='{{$liWrapper_1}} '>--}}
 {{--                <a--}}
 {{--                    {!! fancyLinkInA($asrOrClosure['url']) !!}--}}
@@ -93,7 +96,7 @@
 {{--                </a>--}}
 
 {{--            </li>--}}
-           @endforeach
+{{--           @endforeach--}}
 {{--            <li class='{{$liWrapper_1}}'>--}}
 {{--                <details class="">--}}
 {{--                    <summary class="{{$jDetails_summary_cssClasses}}">--}}
@@ -162,6 +165,6 @@
 
 
 {{--            </li>--}}
-        </ul>
-    </nav>
+{{--        </ul>--}}
+{{--    </nav>--}}
 </div>

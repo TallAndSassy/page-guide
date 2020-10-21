@@ -18,9 +18,10 @@ class Sidenav extends Component
     {
         // Note: close(); is there to force closing of any open modal
         // 8/20' Known Issue: Calls close() twice.  Everything is always getting closed twice.
+
         return <<<EOD
         wire:click="\$emit('pageRoute','$url')"
-        x-on:click.prevent="maybeCloseAdminMenu(); urlChange('$url');close(); "
+        x-on:click.prevent="maybeCloseAdminMenu(); urlChange('$url');"
         href="{$url}"
         EOD;
     }

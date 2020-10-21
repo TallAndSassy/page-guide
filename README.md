@@ -32,6 +32,8 @@ require_once(base_path('vendor/tallandsassy/page-guide/routes/web.php'));
     public const HOME = '/me';
 ```
 
+## Icons for Admin Menus
+Visit: https://blade-ui-kit.com/blade-icons/heroicon-o-home
 
 
 ## Changelog
