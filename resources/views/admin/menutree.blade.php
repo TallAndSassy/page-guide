@@ -127,7 +127,7 @@
                                                 @endphp
                                                 <li>
                                                     <a class="{{($depth == 2) ? $secondLeaf_cssClasses : ($depth == 3 ? $thirdLeaf_cssClasses : dd([__FILE__,__LINE__,"Too deep"]))}} {{$menutree::isOnThisRoute($menuEntry) ? 'font-extrabold text-lg' : ''}} "
-                                                        {!! fancyLinkInA('/admin/communication_template') !!}>{{$menuEntry['Label']}}</a>
+                                                        {!! fancyLinkInA($menuEntry['Url']) !!}>{{$menuEntry['Label']}}</a>
                                                 </li>
                                             @elseif ($menutree::isTop($menuEntry))
                                                 {{--  Do Nothing--}}
