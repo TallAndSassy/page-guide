@@ -31,7 +31,7 @@ class MenuTree # implements #\Iterator
         return static::$mes[$handle];
     }
 
-    public function pushTop(string $handle, string $Label, ?string $SvgHtml, ?string $IconName, ?string $urlIfNoFurtherChildren_nullIfGroup): MenuTree
+    public function pushTop(string $handle, string $Label, ?string $SvgHtml, ?string $IconName, ?string $urlIfNoFurtherChildren_nullIfGroup, ?string $IconSizingClasses = null): MenuTree
     {
         $this->asrMenus[$handle] = [
             'Label' => $Label,
@@ -41,6 +41,7 @@ class MenuTree # implements #\Iterator
             #'Children' => [],
             'Handle' => $handle,
             'EnumType' => 'Top',
+            'IconSizingClasses' => $IconSizingClasses,
         ];
         #$this->currentRoute = $currentRoute_short;
         #static::$lastTopHandle = $handle;
@@ -177,9 +178,12 @@ class MenuTree # implements #\Iterator
     /* Render whole menu
     Future: Build from user-stylable components
     */
-    public function getHtml() : string
+    public function getHtml(array $arrAttributes = ['class' => '']) : string
     {
-        return view('tassy::admin.menutree', ['menutree' => $this])->render();
+        return view('tassy::admin.menutree', [
+            'menutree' => $this,
+            'arrAttributes' => $arrAttributes,
+        ])->render();
         //        foreach ($this->topMenu as $top) {
         //            $Label = $top['Label'];
         //            $SvgHtml = $top['SvgHtml'];

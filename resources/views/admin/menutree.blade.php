@@ -1,4 +1,4 @@
-<div>
+<div >
     @php
         $liWrapper_1 = $liWrapper_2 = ' pr-0 ';
               $liWrapper_3 = ' pr-1 pl-2  ';  // feels like should be below, not in li
@@ -16,7 +16,8 @@
               $secondLeaf_cssClasses  = "$linkFontColor_cssClasses        $linkFocus_cssClasses group flex items-center ml-8 px-2 py-1 text-sm leading-5 rounded-md  ";
               $secondBreak_cssClasses = "$placeholderFontColor_cssClasses ml-10   text-base font-bold ";
               $thirdLeaf_cssClasses   = "$linkFontColor_cssClasses        $linkFocus_cssClasses ml-13  ";
-              $icon_cssClasses = "topLevelNavIcon w-6 h-6  $placeholderFontColor_cssClasses ";
+              $IconSizingClasses = 'w-6 h-6';
+              $icon_cssClasses = "topLevelNavIcon  $placeholderFontColor_cssClasses ";
               $jDetails_summary_cssClasses = "jDetails_summary  $divNode_cssClasses cursor-pointer";
               $jDetails_body_cssClasses = 'ml-0 ';
 
@@ -46,7 +47,7 @@
         }
     </style>
 
-    <nav class=" flex flex-1 px-2 py-4 bg-gray-800">
+    <nav class=" flex flex-1  {{ $arrAttributes['class']}}">
         <ul class="">
             @php $menuKeys = array_keys($menutree->asrMenus);;@endphp
             @for ($i = 0; $i < count($menuKeys); $i++)
@@ -68,9 +69,9 @@
                                 {{-- [ ] Did you need to install this font kit, like 'composer require blade-ui-kit/blade-heroicons' as specified on the --}}
                                 {{--     https://blade-ui-kit.com/blade-icons/heroicon-o-home                            --}}
                                 {{-- Try visiting https://blade-ui-kit.com/blade-icons.--}}
-                                @svg($menuEntry['IconName'], $icon_cssClasses)
+                                @svg($menuEntry['IconName'],$icon_cssClasses.' '.($menuEntry['IconSizingClasses'] ? $menuEntry['IconSizingClasses'] : $IconSizingClasses).' ')
                             @endif
-                            <span class=" {{$firstLeafText_cssClasses}}">{{$menuEntry['Label']}}</span>
+                            <span class=" {{$firstLeafText_cssClasses}} ">{{$menuEntry['Label']}}</span>
                         </a>
                     </li>
                 @elseif ($menutree::isTopNode($menuEntry))
@@ -85,7 +86,7 @@
                                     {{-- [ ] Did you need to install this font kit, like 'composer require blade-ui-kit/blade-heroicons' as specified on the --}}
                                     {{--     https://blade-ui-kit.com/blade-icons/heroicon-o-home                            --}}
                                     {{-- Try visiting https://blade-ui-kit.com/blade-icons.--}}
-                                    @svg($menuEntry['IconName'], $icon_cssClasses)
+                                    @svg($menuEntry['IconName'],$icon_cssClasses.' '.($menuEntry['IconSizingClasses'] ? $menuEntry['IconSizingClasses'] : $IconSizingClasses).' ')
                                 @endif
                                 <span class=" {{$firstLeafText_cssClasses}}">{{$menuEntry['Label']}}</span>
                             </summary>
