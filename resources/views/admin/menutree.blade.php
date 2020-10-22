@@ -1,12 +1,14 @@
-<div >
+<div>
     @php
         $liWrapper_1 = $liWrapper_2 = ' pr-0 ';
               $liWrapper_3 = ' pr-1 pl-2  ';  // feels like should be below, not in li
 
               $linkFontColor_cssClasses = 'text-gray-300';
               $linkFocus_cssClasses = ' group flex pr-1 pl-2 rounded-md focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150';
-              $picked_classes = 'bg-gray-500 rounded';
+
+              $picked_classes = 'bePickedLink bg-gray-500 rounded'; // think, current page
               $placeholderFontColor_cssClasses = 'text-gray-400';
+
 
 
               $divNode_cssClasses     = "$linkFontColor_cssClasses        $linkFocus_cssClasses no-underline group flex items-center px-2 py-2 text-lg leading-5 font-bold   ";
@@ -16,7 +18,7 @@
               $secondLeaf_cssClasses  = "$linkFontColor_cssClasses        $linkFocus_cssClasses group flex items-center ml-8 px-2 py-1 text-sm leading-5 rounded-md  ";
               $secondBreak_cssClasses = "$placeholderFontColor_cssClasses ml-10   text-base font-bold ";
               $thirdLeaf_cssClasses   = "$linkFontColor_cssClasses        $linkFocus_cssClasses ml-13  ";
-              $IconSizingClasses_Default = 'w-6 h-6';
+              $IconSizingClasses_Default = 'beIconWrapper w-6 h-6';
               //$IconSizingClasses = $menuEntry['IconSizingClasses'] ? $menuEntry['IconSizingClasses'] : $IconSizingClasses_Default;
               $icon_cssClasses = "topLevelNavIcon  $placeholderFontColor_cssClasses ";
               $jDetails_summary_cssClasses = "jDetails_summary  $divNode_cssClasses cursor-pointer";
@@ -31,10 +33,10 @@
                   EOD;
               }*/
               if (!function_exists('fancylinkInA')) {
-     function fancylinkInA(string $url) {
-         return \TallAndSassy\PageGuide\Components\Sidenav::wireSwaplinkInA($url);
-     }
-     }
+                 function fancylinkInA(string $url) {
+                     return \TallAndSassy\PageGuide\Components\Sidenav::wireSwaplinkInA($url);
+                 }
+              }
 
     @endphp
     <style>
@@ -58,10 +60,11 @@
                     if ($key == 'admin.salad.fruit') {
                         #dd($menuEntry);
                     }
+                    $pickedClasses_ifOnThisRoute = \TallAndSassy\PageGuide\MenuTree::isOnThisRoute($menuEntry) ? $picked_classes : '';
                 @endphp
                 @if ($menutree::isTopLeaf($menuEntry))
                     <li class='{{$liWrapper_1}} '>
-                        <a {!! fancyLinkInA($menuEntry['Url']) !!} class="{{$firstLeaf_cssClasses}} {{$menutree::isOnThisRoute($menuEntry) ? 'font-extrabold text-lg' : ''}}">
+                        <a {!! fancyLinkInA($menuEntry['Url']) !!} class="{{$firstLeaf_cssClasses}} {{$menutree::isOnThisRoute($menuEntry) ? 'font-extrabold text-lg' : ''}} {{$pickedClasses_ifOnThisRoute}}">
                             @if (! empty($menuEntry['SvgHtml']) )
                                 {!! $menuEntry['SvgHtml'] !!}
                             @elseif (! empty($menuEntry['IconName']) )
@@ -72,7 +75,9 @@
                                 {{-- Try visiting https://blade-ui-kit.com/blade-icons.--}}
                                 {{-- You can basically shrink the icon, and maybe increase it, but we need standard spacing, so we wrap it in a w-6 div.   --}}
                                 @php $IconSizingClasses = $menuEntry['IconSizingClasses'] ? $menuEntry['IconSizingClasses'] : $IconSizingClasses_Default; @endphp
-                                <div class="{{$IconSizingClasses_Default}}">@svg($menuEntry['IconName'],$icon_cssClasses.' '.$IconSizingClasses)</div>
+                                <div class="{{$IconSizingClasses_Default}}">
+                                    @svg($menuEntry['IconName'],$icon_cssClasses.' '.$IconSizingClasses)
+                                </div>
                             @endif
                             <span class=" {{$firstLeafText_cssClasses}} ">{{$menuEntry['Label']}}</span>
                         </a>
@@ -91,7 +96,9 @@
                                     {{-- Try visiting https://blade-ui-kit.com/blade-icons.--}}
                                     {{-- You can basically shrink the icon, and maybe increase it, but we need standard spacing, so we wrap it in a w-6 div.   --}}
                                     @php $IconSizingClasses = $menuEntry['IconSizingClasses'] ? $menuEntry['IconSizingClasses'] : $IconSizingClasses_Default; @endphp
-                                    <div class="{{$IconSizingClasses_Default}}">@svg($menuEntry['IconName'],$icon_cssClasses.' '.$IconSizingClasses)</div>
+                                    <div class="{{$IconSizingClasses_Default}}">
+                                        @svg($menuEntry['IconName'],$icon_cssClasses.' '.$IconSizingClasses)
+                                    </div>
                                 @endif
                                 <span class=" {{$firstLeafText_cssClasses}}">{{$menuEntry['Label']}}</span>
                             </summary>
@@ -112,6 +119,8 @@
                                         @if ($hasMoreSubMenus)
                                             @php  $i++; $key = $menuKeys[$i];
                                             $menuEntry = $menutree->asrMenus[$key];
+
+
                                             @endphp
                                             @if ($menutree::isGroup($menuEntry))
                                                 @php
@@ -121,7 +130,8 @@
                                                     }
                                                 @endphp
                                                 <li>
-                                                    <div class="{{$secondBreak_cssClasses}}">{{$menuEntry['Label']}}</div>
+                                                    <div
+                                                        class="{{$secondBreak_cssClasses}}">{{$menuEntry['Label']}}</div>
                                                 </li>
                                             @elseif ($menutree::isLink($menuEntry))
                                                 @php
@@ -129,14 +139,15 @@
                                                         $depth = 3;
                                                         $lastItemWasType = 'Link';
                                                     }
+                                                    $pickedClasses_ifOnThisRoute = \TallAndSassy\PageGuide\MenuTree::isOnThisRoute($menuEntry) ? $picked_classes : '';
                                                 @endphp
                                                 <li>
-                                                    <a class="{{($depth == 2) ? $secondLeaf_cssClasses : ($depth == 3 ? $thirdLeaf_cssClasses : dd([__FILE__,__LINE__,"Too deep"]))}} {{$menutree::isOnThisRoute($menuEntry) ? 'font-extrabold text-lg' : ''}} "
+                                                    <a class="{{($depth == 2) ? $secondLeaf_cssClasses : ($depth == 3 ? $thirdLeaf_cssClasses : dd([__FILE__,__LINE__,"Too deep"]))}}  {{$pickedClasses_ifOnThisRoute}} "
                                                         {!! fancyLinkInA($menuEntry['Url']) !!}>{{$menuEntry['Label']}}</a>
                                                 </li>
                                             @elseif ($menutree::isTop($menuEntry))
                                                 {{--  Do Nothing--}}
-                                                 @php dd([__FILE__,__LINE__,"YIKES:",'i'=>$i, '$key'=>$key, '$menuEntry'=>$menuEntry, 'menutree'=>$menutree]); @endphp
+                                                @php dd([__FILE__,__LINE__,"YIKES:",'i'=>$i, '$key'=>$key, '$menuEntry'=>$menuEntry, 'menutree'=>$menutree]); @endphp
                                             @endif
                                         @endif
                                     @endwhile
