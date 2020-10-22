@@ -83,8 +83,11 @@
                         </a>
                     </li>
                 @elseif ($menutree::isTopNode($menuEntry))
+                    @php
+                    $isActiveRouteUnderMe = $menutree->isActiveRouteUnderMe($menuEntry);
+                    @endphp
                     <li class='{{$liWrapper_1}}'>
-                        <details class="">
+                        <details class="" {{$isActiveRouteUnderMe ? 'open' : ''}}>
                             <summary class="{{$jDetails_summary_cssClasses}}">
                                 @if (! empty($menuEntry['SvgHtml']) )
                                     {!! $menuEntry['SvgHtml'] !!}

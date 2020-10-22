@@ -127,6 +127,27 @@ class MenuTree # implements #\Iterator
 
         return (strpos(request()->getPathInfo(), $asrMenu['Url']) === 0);
     }
+
+    public function isActiveRouteUnderMe(array $asrMenu) : bool
+    {
+        assert(static:: isTopNode($asrMenu));
+        // walk from me, to next non-top menu item
+        $arrKeys = array_keys($this->asrMenus);
+        $myKeySlot = array_search($asrMenu['Handle'], $arrKeys, true);
+        $lastPossibleKeySlot = count($arrKeys) - 1;
+        for ($i = $myKeySlot + 1; $i <= $lastPossibleKeySlot; $i++) {
+            $theHandle = $arrKeys[$i];
+            $theMenuEntry = $this->asrMenus[$theHandle];
+            if (static::isTop($theMenuEntry)) {
+                return false;
+            }
+            if (static::isOnThisRoute($theMenuEntry)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
     //    private function getSubMenuExtraClasses(array $asrMenu): string
     //    {
     //        $routesMatch = $this->isOnThisRoute($asrMenu);
