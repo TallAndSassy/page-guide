@@ -2,7 +2,6 @@
     <x-slot name="title">
         Admin Default
     </x-slot>
-    <div class="">Menu ->] </div>
-    Admin Body
+    A reasonable person would override this, or redirect it.
 
 </x-tassy::page-admin>
