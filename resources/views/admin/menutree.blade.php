@@ -16,7 +16,8 @@
               $secondLeaf_cssClasses  = "$linkFontColor_cssClasses        $linkFocus_cssClasses group flex items-center ml-8 px-2 py-1 text-sm leading-5 rounded-md  ";
               $secondBreak_cssClasses = "$placeholderFontColor_cssClasses ml-10   text-base font-bold ";
               $thirdLeaf_cssClasses   = "$linkFontColor_cssClasses        $linkFocus_cssClasses ml-13  ";
-              $IconSizingClasses = 'w-6 h-6';
+              $IconSizingClasses_Default = 'w-6 h-6';
+              //$IconSizingClasses = $menuEntry['IconSizingClasses'] ? $menuEntry['IconSizingClasses'] : $IconSizingClasses_Default;
               $icon_cssClasses = "topLevelNavIcon  $placeholderFontColor_cssClasses ";
               $jDetails_summary_cssClasses = "jDetails_summary  $divNode_cssClasses cursor-pointer";
               $jDetails_body_cssClasses = 'ml-0 ';
@@ -69,7 +70,9 @@
                                 {{-- [ ] Did you need to install this font kit, like 'composer require blade-ui-kit/blade-heroicons' as specified on the --}}
                                 {{--     https://blade-ui-kit.com/blade-icons/heroicon-o-home                            --}}
                                 {{-- Try visiting https://blade-ui-kit.com/blade-icons.--}}
-                                @svg($menuEntry['IconName'],$icon_cssClasses.' '.($menuEntry['IconSizingClasses'] ? $menuEntry['IconSizingClasses'] : $IconSizingClasses).' ')
+                                {{-- You can basically shrink the icon, and maybe increase it, but we need standard spacing, so we wrap it in a w-6 div.   --}}
+                                @php $IconSizingClasses = $menuEntry['IconSizingClasses'] ? $menuEntry['IconSizingClasses'] : $IconSizingClasses_Default; @endphp
+                                <div class="{{$IconSizingClasses_Default}}">@svg($menuEntry['IconName'],$icon_cssClasses.' '.$IconSizingClasses)</div>
                             @endif
                             <span class=" {{$firstLeafText_cssClasses}} ">{{$menuEntry['Label']}}</span>
                         </a>
@@ -86,7 +89,9 @@
                                     {{-- [ ] Did you need to install this font kit, like 'composer require blade-ui-kit/blade-heroicons' as specified on the --}}
                                     {{--     https://blade-ui-kit.com/blade-icons/heroicon-o-home                            --}}
                                     {{-- Try visiting https://blade-ui-kit.com/blade-icons.--}}
-                                    @svg($menuEntry['IconName'],$icon_cssClasses.' '.($menuEntry['IconSizingClasses'] ? $menuEntry['IconSizingClasses'] : $IconSizingClasses).' ')
+                                    {{-- You can basically shrink the icon, and maybe increase it, but we need standard spacing, so we wrap it in a w-6 div.   --}}
+                                    @php $IconSizingClasses = $menuEntry['IconSizingClasses'] ? $menuEntry['IconSizingClasses'] : $IconSizingClasses_Default; @endphp
+                                    <div class="{{$IconSizingClasses_Default}}">@svg($menuEntry['IconName'],$icon_cssClasses.' '.$IconSizingClasses)</div>
                                 @endif
                                 <span class=" {{$firstLeafText_cssClasses}}">{{$menuEntry['Label']}}</span>
                             </summary>
