@@ -4,28 +4,13 @@ namespace TallAndSassy\PageGuide\Http\Controllers\Admin;
 
 class AdminController extends \Illuminate\Routing\Controller
 {
-    
-//    /**
-//     * Create a new controller instance.
-//     *
-//     * @return void
-//     */
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
-
-    //    protected function FailOnDeadView($view){
-    //        if(!view()->exists($view)){
-    //            abort(404,$view);
-    //        }
-    //    }
+    /* It is worth noting that LePage works differently in that it just swaps out the body.  */
 
 
     // Load based upon if the file is actually there. Extra /name/JJ stuff at the end get passed as associative
-    private function _showGenerically(string $topDir, string $insideBladeName,   string $subLevels)
+    private function _showGenerically(string $topDir, string $insideBladeName,   string $subLevels, bool $isLivewire)
     {
-        $view_prefix_with_colons = 'tassy::';
+        $view_prefix_with_colons = $blade_prefix = \TallAndSassy\PageGuide\PageGuideServiceProvider::$blade_prefix.'::';
         assert($topDir == 'admin');// reserved to remind me that this could be a good generic function
         $args = explode('/', $subLevels);
         while (is_null(end($args))) { // https://stackoverflow.com/a/8663364/93933 remove trailing empties
@@ -60,13 +45,16 @@ class AdminController extends \Illuminate\Routing\Controller
         if (empty($_shortenedViewPath)) {
             abort(404, implode('-', $arrParts));
         } else {
-             #dd([__FILE__,__LINE__,'$arrParts'=>$arrParts,'$arrPath'=>$arrPath, '$_shortenedViewPath'=>$_shortenedViewPath,  'asrParams'=>$asrParams]);
+            #dd([__FILE__,__LINE__,'$arrParts'=>$arrParts,'$arrPath'=>$arrPath, '$_shortenedViewPath'=>$_shortenedViewPath,  'asrParams'=>$asrParams]);
             #return view("$topDir.$insideBladeName", ['pageRoute' => $shortenedViewPath,'asrParams' => $asrParams]);
-            return view($_shortenedViewPath, ['pageRoute' => $_shortenedViewPath,'asrParams' => $asrParams])->render();
+            // Might need to find the more-local controller.
+
+            return view($_shortenedViewPath, ['pageRoute' => $_shortenedViewPath,'asrParams' => $asrParams, 'isLivewire' => $isLivewire]);
         }
     }
 
 
+    // showAdminFronts is called by the routes/web.php
     public function showAdminFronts(string $subLevels)
     {
         #dd([__FILE__,__LINE__,$subLevels]);
@@ -74,19 +62,20 @@ class AdminController extends \Illuminate\Routing\Controller
             //return $this->OurSpecialMethod($sub1, $sub2, etc.);
         } else {
             #return $this->_showGenerically('admin', '__outer', $subLevels);// Default - Just loook for the file
-            return $this->_showGenerically('admin', 'page-admin', $subLevels);// Default - Just loook for the file
+            return $this->_showGenerically('admin', 'page-admin', $subLevels, false);// Default - Just loook for the file
         }
     }
 
-    //    public function showAdminBody(string $subLevels)
-    //    {
-    //        if ($subLevels[0] == 'OtherSpecialCaseMatchGoesHere') {
-    //            //return $this->OurSpecialMethod($sub1, $sub2, etc.);
-    //        } else {
-    //            #dd($subLevels);
-    //            return $this->_showGenerically('admin', '_body', $subLevels);// Default - Just loook for the file
-    //        }
-    //    }
+    // showAdminBody is called by the livewire LePage. The shell is already present.
+    public function showAdminBody(string $subLevels)
+    {
+        if ($subLevels[0] == 'OtherSpecialCaseMatchGoesHere') {
+            //return $this->OurSpecialMethod($sub1, $sub2, etc.);
+        } else {
+            #dd($subLevels);
+            return $this->_showGenerically('admin', '_body', $subLevels, true);// Default - Just loook for the file
+        }
+    }
 
     //    public static function wireSwaplinkInA(string $url)
     //    {
