@@ -1,5 +1,6 @@
 <div>
     @php
+
         $liWrapper_1 = $liWrapper_2 = ' pr-0 ';
               $liWrapper_3 = ' pr-1 pl-2  ';  // feels like should be below, not in li
 
@@ -24,19 +25,7 @@
               $jDetails_summary_cssClasses = "jDetails_summary  $divNode_cssClasses cursor-pointer";
               $jDetails_body_cssClasses = 'ml-0 ';
 
-              // Goes inside <a > to make it linky'  Doesn't include classes.  I had trouble parameterizing full html link
-              /*function fancylinkInA(string $url) {
-                  return <<<EOD
-                  wire:click="\$emit('pageRoute','$url')"
-                  x-on:click="urlChange('$url'); prevent();"
-                  href="{$url}" x-on:click.prevent
-                  EOD;
-              }*/
-              if (!function_exists('fancylinkInA')) {
-                 function fancylinkInA(string $url) {
-                     return \TallAndSassy\PageGuide\Components\Sidenav::wireSwaplinkInA($url);
-                 }
-              }
+
 
     @endphp
     <style>
@@ -64,7 +53,7 @@
                 @endphp
                 @if ($menutree::isTopLeaf($menuEntry))
                     <li class='{{$liWrapper_1}} '>
-                        <a {!! fancyLinkInA($menuEntry['Url']) !!} class="{{$firstLeaf_cssClasses}} {{$menutree::isOnThisRoute($menuEntry) ? 'font-extrabold text-lg' : ''}} {{$pickedClasses_ifOnThisRoute}}">
+                        <a {!! \TallAndSassy\PageGuide\Components\Lepage::wireSwaplinkInA($menuEntry['Url']) !!} class="{{$firstLeaf_cssClasses}} {{$menutree::isOnThisRoute($menuEntry) ? 'font-extrabold text-lg' : ''}} {{$pickedClasses_ifOnThisRoute}}">
                             @if (! empty($menuEntry['SvgHtml']) )
                                 {!! $menuEntry['SvgHtml'] !!}
                             @elseif (! empty($menuEntry['IconName']) )
@@ -146,7 +135,7 @@
                                                 @endphp
                                                 <li>
                                                     <a class="{{($depth == 2) ? $secondLeaf_cssClasses : ($depth == 3 ? $thirdLeaf_cssClasses : dd([__FILE__,__LINE__,"Too deep"]))}}  {{$pickedClasses_ifOnThisRoute}} "
-                                                        {!! fancyLinkInA($menuEntry['Url']) !!}>{{$menuEntry['Label']}}</a>
+                                                        {!! \TallAndSassy\PageGuide\Components\Lepage::wireSwaplinkInA($menuEntry['Url']) !!}>{{$menuEntry['Label']}}</a>
                                                 </li>
                                             @elseif ($menutree::isTop($menuEntry))
                                                 {{--  Do Nothing--}}
