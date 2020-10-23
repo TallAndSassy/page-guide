@@ -150,6 +150,7 @@ class PageGuideServiceProvider extends ServiceProvider
         // TODO: Add your own other boot related stuff here...
          \Livewire\Livewire::component('tassy::livewire.sidenav',  \TallAndSassy\PageGuide\Components\Sidenav::class);
          \Livewire\Livewire::component('tassy::livewire.lowernav',  \TallAndSassy\PageGuide\Components\Lowernav::class);
+         \Livewire\Livewire::component('tassy::livewire.lepage',  \TallAndSassy\PageGuide\Components\Lepage::class);
     }
 
     public function register()
