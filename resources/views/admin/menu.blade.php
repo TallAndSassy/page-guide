@@ -1,5 +1,6 @@
 <div>
     @php
+    // WARNING: THIS IS THE TOP MENU... MENUTREE is the SIDE MENU
         // =========================== Boot Stuff  =============================================================================
         /*  Build back-end menu entries
            This should almost definitely live somewhere else
