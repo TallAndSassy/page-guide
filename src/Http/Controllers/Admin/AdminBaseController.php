@@ -96,7 +96,11 @@ abstract class AdminBaseController extends \Illuminate\Routing\Controller
         //            }
     }
 
-    abstract public function getBodyView(string $subLevels) :  \Illuminate\View\View;
+    #abstract public function getBodyView(string $subLevels) :  \Illuminate\View\View;
+    public function getBodyView(string $subLevels) : \Illuminate\View\View
+    {
+        return view(static::viewRef);
+    }
 
     //    public static function wireSwaplinkInA(string $url) // See LePage
 }
