@@ -27,12 +27,6 @@ Route::middleware(['auth:sanctum', 'verified'])
     )
     ->where('sublevels', '.*');
 
-Route::middleware(['auth:sanctum', 'verified'])
-    ->get(
-        '/admin/dashboard/{sublevels?}',
-        [\TallAndSassy\PageGuide\Http\Controllers\Admin\DashboardController::class, 'getFrontView'] // syntax works
-    )
-    ->where('sublevels', '.*');
 
 
 // -- WARNING -- These routes are matching before app-theme-base-admin routes match
