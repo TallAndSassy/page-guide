@@ -9,7 +9,7 @@
             back depends upon the the url, which was no longer relevant. Ugh.
             So, we ended up just telling lepage.blade.php (which is ALWAYS just for admin) to include the admin
             version of this menu.  It is not ideal, but good enough for now.
-        
+
         */
         \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
            "home",
@@ -43,5 +43,5 @@
         );
 
     @endphp
-    <x-tassy::header.back.menu class="lg:pt-1"/>
+    <x-tassy::header.back.menu class="lg:pt-1 "/>
 </div>
