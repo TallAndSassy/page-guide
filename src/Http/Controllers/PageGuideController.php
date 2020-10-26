@@ -20,7 +20,7 @@ class PageGuideController
         #dd([__FILE__,__LINE__,$firstSubDir, get_class_vars(PageGuideController::class)]);
     }
 
-    public static function isBackPage(): bool
+    public static function isABackPage(): bool
     {
         if (! static::$isInited) {
             static::initCache();
@@ -29,7 +29,7 @@ class PageGuideController
         return static::$isBackPage;
     }
 
-    public static function isAdminPage(): bool
+    public static function isAnAdminPage(): bool
     {
         if (! static::$isInited) {
             static::initCache();
@@ -38,7 +38,7 @@ class PageGuideController
         return static::$isAdminPage;
     }
 
-    public static function isMePage(): bool
+    public static function isAMePage(): bool
     {
         if (! static::$isInited) {
             static::initCache();
@@ -47,7 +47,7 @@ class PageGuideController
         return static::$isMePage;
     }
 
-    public static function isFrontPage(): bool
+    public static function isAFrontPage(): bool
     {
         if (! static::$isInited) {
             static::initCache();

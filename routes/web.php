@@ -63,7 +63,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get(
 /*  Build back-end menu entries
     This should almost definitely live somewhere else
 */
-$isBackPage = \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isBackPage();
+$isBackPage = \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isABackPage();
 if ($isBackPage) {
     \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
         "home",
@@ -71,7 +71,7 @@ if ($isBackPage) {
             'name' => __('tassy::PageGuide.FrontLinkText'),
             "url" => "/",
             "classes" => "",
-            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isFrontPage(),
+            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isAFrontPage(),
         ]
     );
 
@@ -81,7 +81,7 @@ if ($isBackPage) {
             'name' => __('tassy::PageGuide.AdminLinkText'),
             "url" => "/admin",
             "classes" => "",
-            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isAdminPage(),
+            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isAnAdminPage(),
         ]
     );
 
@@ -91,7 +91,7 @@ if ($isBackPage) {
             'name' => __('tassy::PageGuide.MeLinkText'),
             "url" => "/me",
             "classes" => "",
-            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isMePage(),
+            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isAMePage(),
 
         ]
     );
