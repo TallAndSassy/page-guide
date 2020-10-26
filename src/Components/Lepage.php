@@ -82,31 +82,31 @@ class Lepage extends Component
 
         return view($blade_prefix.'::livewire.lepage', ['bodyHtml' => $bodyHtml, 'title' => 'fromLePageRender']);
 
-        $this->justMounted = false;
-
-        // LePage means we clicked on something and we want a big chunck to swap out.  Lets get that swap.
-
-
-        $route = app('router')->getRoutes()->match(app('request')->create($this->pageRoute, 'GET'));
-        #dd($route);
-
-        $controllerAtMethod_asString = $route->action['controller'];
-        // Turn  'App\Http\Controllers\AdminController@showAdminFronts' into 'App\Http\Controllers\AdminController@showAdminBody'
-        //  cuz we are livewire here - we already have the shell
-        $controllerAtMethod_asString = str_replace('Fronts', 'Body', $controllerAtMethod_asString);
-
-        // If refreshing, the params need to be put back into the url.  Probably should have just stored it. oh well.
-        $reconstructedUrl = implode('/', $route->parameters);
-        foreach ($this->asrParams as $key => $val) {
-            $reconstructedUrl .= "/$key/$val";
-        }
-
-        $innerView = \App::call($controllerAtMethod_asString, ['subLevels' => $reconstructedUrl]);
-        $innerHtml = $innerView->getView();
-        $blade_prefix = \TallAndSassy\PageGuide\PageGuideServiceProvider::$blade_prefix;
-        $this->justMounted = false;
-
-        return view($blade_prefix.'::livewire.lepage', ['innerHtml' => $innerHtml]);
+        //        $this->justMounted = false;
+        //
+        //        // LePage means we clicked on something and we want a big chunck to swap out.  Lets get that swap.
+        //
+        //
+        //        $route = app('router')->getRoutes()->match(app('request')->create($this->pageRoute, 'GET'));
+        //        #dd($route);
+        //
+        //        $controllerAtMethod_asString = $route->action['controller'];
+        //        // Turn  'App\Http\Controllers\AdminController@showAdminFronts' into 'App\Http\Controllers\AdminController@showAdminBody'
+        //        //  cuz we are livewire here - we already have the shell
+        //        $controllerAtMethod_asString = str_replace('Fronts', 'Body', $controllerAtMethod_asString);
+        //
+        //        // If refreshing, the params need to be put back into the url.  Probably should have just stored it. oh well.
+        //        $reconstructedUrl = implode('/', $route->parameters);
+        //        foreach ($this->asrParams as $key => $val) {
+        //            $reconstructedUrl .= "/$key/$val";
+        //        }
+        //
+        //        $innerView = \App::call($controllerAtMethod_asString, ['subLevels' => $reconstructedUrl]);
+        //        $innerHtml = $innerView->getView();
+        //        $blade_prefix = \TallAndSassy\PageGuide\PageGuideServiceProvider::$blade_prefix;
+        //        $this->justMounted = false;
+        //
+        //        return view($blade_prefix.'::livewire.lepage', ['innerHtml' => $innerHtml]);
     }
 
     public static function wireSwaplinkInA(string $url)
