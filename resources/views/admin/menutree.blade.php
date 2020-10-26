@@ -40,7 +40,7 @@
     </style>
 
     <nav class=" flex flex-1  {{ $arrAttributes['class']}}">
-        <ul class="">
+        <ul class="pt-2 w-full">
             @php $menuKeys = array_keys($menutree->asrMenus);;@endphp
             @for ($i = 0; $i < count($menuKeys); $i++)
                 @php
