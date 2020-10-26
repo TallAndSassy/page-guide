@@ -13,7 +13,7 @@ class Lepage extends Component
     public string $tagline = 'For kids!';
     protected $listeners = ['pageRoute' => 'updateToPage', 'tab' => 'tab',];
     public array $asrParams = [];
-    private bool $justMounted;
+    private bool $justMounted = false;
     private string $ControllerName;
     private $controllerObj;
     // TODO: Store oringal url
@@ -49,43 +49,34 @@ class Lepage extends Component
     }
     public function render()
     {
-        $request = app('request');
-        $tailingUrl = $request->path(); //http://domain.com/foo/bar, the path method will return foo/bar
-        $route = app('router')->getRoutes()->match($request);
-
-
-//        dd(
-//            app('router')->getRoutes()->match($request)
-//        );
-//        $route = app('router')->getRoutes()->match(app('request')->create($this->pageRoute987, 'GET'));
-
+        if ($this->justMounted) {
+            $request = app('request');
+            $route = app('router')->getRoutes()->match($request);
+            unset($request);
+        } else {
+            $route = app('router')->getRoutes()->match(app('request')->create($this->pageRoute, 'GET'));
+        }
+        # FYI: $tailingUrl = $request->path(); //http://domain.com/foo/bar, the path method will return foo/bar
         // If refreshing, the params need to be put back into the url.  Probably should have just stored it. oh well.
+        // what is this, really?  old flotsam?
         $reconstructedUrl = implode('/', $route->parameters);
         foreach ($this->asrParams as $key => $val) {
             $reconstructedUrl .= "/$key/$val";
         }
+
         $controllerAtMethod_asString = $route->action['controller'];
         $controllerAtMethod_asString = str_replace('getFrontView', 'getBodyView', $controllerAtMethod_asString);
-        $controllerName = substr($controllerAtMethod_asString, 0, strpos($controllerAtMethod_asString, '@'));// trim everything before '@'
-        #$route = app('router')->getRoutes()->match($request->create($tailingUrl, 'GET'));
-        #dd($route->action);
-        #$controllerAtMethod_asString = $this->ControllerName."::getBodyView";
-        #dd($route->action['uses']);
-        //$controllerAtMethod_asString = str_replace('index', 'getBodyView', $controllerAtMethod_asString);
+        $this->ControllerName = substr($controllerAtMethod_asString, 0, strpos($controllerAtMethod_asString, '@'));// trim everything before '@'
 
         $bodyView = \App::call($controllerAtMethod_asString, ['subLevels' => $reconstructedUrl]);
-        #dd($controllerObj);
 
-//        $controllerAtMethod_asString = $route->action['controller'];
-//        $controllerAtMethod_asString = str_replace('index', 'getBodyView', $controllerAtMethod_asString);
-//        $controllerObj = \App::call($controllerObj, ['subLevels' => $reconstructedUrl]);
-//        $bodyView = $controllerObj->getBodyView();
-        $this->title = $controllerName::$title; // Error here?...
+        $this->title = $this->ControllerName::$title; // Error here?...
         // Try, in your body controller, adding
         //      public static string $title = 'My Clever Page Title';
         // (we would have made this an abstract property in AdminBaseController, but that isn't a thing.)
 
         $bodyHtml = $bodyView->render();
+        #dd([__FILE__,__LINE__, $bodyHtml]);
 
         $blade_prefix = \TallAndSassy\PageGuide\PageGuideServiceProvider::$blade_prefix;
 
