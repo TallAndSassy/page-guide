@@ -9,11 +9,12 @@ abstract class RenderWrangler
     #abstract protected static array $asrProviders; // I only want to share at the leaf
     #abstract public static function wrangleMe(string $key, $asrPackageOrCloser): void;
 
-public static function wrangleMe(string $key, $asrPackageOrCloser): void
+    public static function wrangleMe(string $key, $asrPackageOrCloser): void
     {
         assert(static::payloadValidates($asrPackageOrCloser));
         static::$asrProviders[$key] = $asrPackageOrCloser;
     }
+
     protected static function payloadValidates($asrPackageOrCloser): bool
     {
         if (is_object($asrPackageOrCloser)) {
@@ -22,10 +23,11 @@ public static function wrangleMe(string $key, $asrPackageOrCloser): void
         assert(is_array($asrPackageOrCloser));
         assert(isset($asrPackageOrCloser['name']));
         assert(isset($asrPackageOrCloser['routeIs']));
+        assert(in_array(gettype($asrPackageOrCloser['routeIs']), ['string','object']));
         assert(isset($asrPackageOrCloser['url']));
         assert(isset($asrPackageOrCloser['classes']));
-        return true;
 
+        return true;
     }
 
 //    public static function renderKey(string $key): string {
