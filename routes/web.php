@@ -30,7 +30,7 @@ Route::middleware(['auth:sanctum', 'verified'])
 Route::middleware(['auth:sanctum', 'verified'])
     ->get(
         '/admin/dashboard/{sublevels?}',
-        [\TallAndSassy\PageGuide\Http\Controllers\Admin\DashboardController::class,'getFrontView'] // syntax works
+        [\TallAndSassy\PageGuide\Http\Controllers\Admin\DashboardController::class, 'getFrontView'] // syntax works
     )
     ->where('sublevels', '.*');
 
@@ -68,31 +68,31 @@ if ($isBackPage) {
     \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
         "home",
         [
-                'name' => __('tassy::PageGuide.FrontLinkText'),
-                "url" => "/",
-                "classes" => "",
-                "routeIs" => "home*",
-            ]
+            'name' => __('tassy::PageGuide.FrontLinkText'),
+            "url" => "/",
+            "classes" => "",
+            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isFrontPage(),
+        ]
     );
 
     \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
         "admin",
         [
-                'name' => __('tassy::PageGuide.AdminLinkText'),
-                "url" => "/admin",
-                "classes" => "",
-                "routeIs" => "admin*",
-            ]
+            'name' => __('tassy::PageGuide.AdminLinkText'),
+            "url" => "/admin",
+            "classes" => "",
+            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isAdminPage(),
+        ]
     );
 
     \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
         "me",
         [
-                'name' => __('tassy::PageGuide.MeLinkText'),
-                "url" => "/me",
-                "classes" => "",
-                "routeIs" => "me*",
+            'name' => __('tassy::PageGuide.MeLinkText'),
+            "url" => "/me",
+            "classes" => "",
+            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isMePage(),
 
-            ]
+        ]
     );
 }
