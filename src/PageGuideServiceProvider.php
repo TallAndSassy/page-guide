@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use TallAndSassy\PageGuide\Commands\PageGuideCommand;
+use TallAndSassy\PageGuide\Components\Lepage;
+use TallAndSassy\PageGuide\Components\Lowernav;
+use TallAndSassy\PageGuide\Components\Sidenav;
 use TallAndSassy\PageGuide\Http\Controllers\PageGuideController;
 
 class PageGuideServiceProvider extends ServiceProvider
@@ -41,7 +44,7 @@ class PageGuideServiceProvider extends ServiceProvider
                 );
             }
 
-             $this->publishes([
+            $this->publishes([
                  __DIR__.'/../resources/public' => public_path('tallandsassy'),
                 ], ['public']);
 
@@ -148,9 +151,27 @@ class PageGuideServiceProvider extends ServiceProvider
         // TODO: Register your livewire components that live in this package here:
         # \Livewire\Livewire::component('tassygroklivewirejet::a-a-nothing',  \TallAndSassy\GrokLivewireJet\Components\DemoUiChunks\AANothing::class);
         // TODO: Add your own other boot related stuff here...
-         \Livewire\Livewire::component('tassy::livewire.sidenav',  \TallAndSassy\PageGuide\Components\Sidenav::class);
-         \Livewire\Livewire::component('tassy::livewire.lowernav',  \TallAndSassy\PageGuide\Components\Lowernav::class);
-         \Livewire\Livewire::component('tassy::livewire.lepage',  \TallAndSassy\PageGuide\Components\Lepage::class);
+        \Livewire\Livewire::component('tassy::livewire.sidenav',  Sidenav::class);
+
+        \Livewire\Livewire::component('tassy::livewire.lowernav', Lowernav::class);
+
+        \Livewire\Livewire::component('tassy::livewire.lepage',   Lepage::class);
+        \Livewire\Livewire::component('tassy::livewire.bobby',  \TallAndSassy\PageGuide\Components\Bobby::class);
+
+        \TallAndSassy\PageGuide\MenuTree::singleton('upper')->pushTop(
+            'admin.bob',
+            'Bob',
+            null,
+            'heroicon-o-question-mark-circle',
+            '/admin/bob'
+        );
+        \TallAndSassy\PageGuide\MenuTree::singleton('upper')->pushTop(
+            'admin.bobby',
+            'Bobby',
+            null,
+            'heroicon-o-question-mark-circle',
+            '/admin/bobby'
+        );
     }
 
     public function register()

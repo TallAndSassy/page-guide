@@ -1,6 +1,8 @@
 <?php
 
 // Front
+use TallAndSassy\PageGuide\Http\Controllers\Admin\BobController;
+
 Route::get(
     '/',
     function () {
@@ -10,31 +12,41 @@ Route::get(
     }
 );
 
-// =========================== Admin ===================================================================================
-//Route::get('/admin/read/{sublevels?}', 'ReadController@showAdminFronts')->where('sublevels', '.*');           // mainly to show use of custom controller
-//Route::get('/admin/help/{sublevels?}', 'HelpController@showAdminFronts')->where('sublevels', '.*');           // mainly to show use of custom controller
-//Route::get('/admin/{sublevels?}', 'AdminController@showAdminFronts')->where('sublevels', '.*');           //https://stackoverflow.com/a/31681869/93933
-
 Route::get('/admin', fn () => redirect('/admin/default'));
 
-Route::middleware(['auth:sanctum', 'verified'])->get(
-    '/admin/{sublevels?}',
-    function (\TallAndSassy\PageGuide\Http\Controllers\Admin\AdminController $AdminController, string $sublevels) {
-        \TallAndSassy\PageGuide\Http\Controllers\Admin\MenuController::boot(); //10/22 no-op
-        #dd($AdminController);
+// =========================== Admin ===================================================================================
+# works: Route::middleware(['auth:sanctum', 'verified'])->get('/admin/bob', fn () => 'hi');
+# works Route::middleware(['auth:sanctum', 'verified'])->get('/admin/bob', function () { return 'bye';});
+# works (but shows nothing, as expected) Route::middleware(['auth:sanctum', 'verified'])->get('/admin/bob', function (BobController $b) { return 'b';});
+Route::middleware(['auth:sanctum', 'verified'])
+    #->get('/admin/bob/{sublevels?}', 'TallAndSassy\PageGuide\Http\Controllers\Admin\BobController@getFrontView') // syntax works
+    ->get(
+        '/admin/bob/{sublevels?}',
+        //[\TallAndSassy\PageGuide\Http\Controllers\Admin\BobController::class, 'getFrontView'] // syntax works
+        [BobController::class, 'getFrontView'] // syntax works w/ use Statement
+    )
+    ->where('sublevels', '.*');
 
-        return $AdminController->showAdminFronts($sublevels);
-    }
-)->name('admin');
+Route::middleware(['auth:sanctum', 'verified'])
+    ->get(
+        '/admin/dashboard/{sublevels?}',
+        [\TallAndSassy\PageGuide\Http\Controllers\Admin\DashboardController::class,'getFrontView'] // syntax works
+    )
+    ->where('sublevels', '.*');
 
-Route::middleware(['auth:sanctum', 'verified'])->get(
-    '/admin',
-    function () {
-        \TallAndSassy\PageGuide\Http\Controllers\Admin\MenuController::boot();
 
-        return view('tassy::admin/index');
-    }
-)->name('admin');
+// -- WARNING -- These routes are matching before app-theme-base-admin routes match
+if (0) {
+    Route::middleware(['auth:sanctum', 'verified'])->get(
+        '/admin/{sublevels?}',
+        function (\TallAndSassy\PageGuide\Http\Controllers\Admin\AdminController $AdminController, string $sublevels) {
+            \TallAndSassy\PageGuide\Http\Controllers\Admin\MenuController::boot(); //10/22 no-op
+            #dd($AdminController);
+
+            return $AdminController->showAdminFronts($sublevels);
+        }
+    )->name('admin');
+}
 
 // =========================== Me ======================================================================================
 Route::middleware(['auth:sanctum', 'verified'])->get(
