@@ -28,6 +28,7 @@ class PageGuideController
 
         return static::$isBackPage;
     }
+
     public static function isAdminPage(): bool
     {
         if (! static::$isInited) {
@@ -36,6 +37,7 @@ class PageGuideController
 
         return static::$isAdminPage;
     }
+
     public static function isMePage(): bool
     {
         if (! static::$isInited) {
@@ -43,5 +45,14 @@ class PageGuideController
         }
 
         return static::$isMePage;
+    }
+
+    public static function isFrontPage(): bool
+    {
+        if (! static::$isInited) {
+            static::initCache();
+        }
+
+        return ! static::$isBackPage;
     }
 }
