@@ -38,13 +38,13 @@ class Lepage extends Component
         $this->pageRoute = $pageRoute;
     }
 
-    public function mount(string $viewRef, string $ControllerName, $controllerObj, array $asrParams)
+    public function mount(string $viewRef, array $asrParams)
     {
         #$this->FailOnDeadView($pageRoute);
         $this->viewRef = $viewRef;
         $this->asrParams = $asrParams;
-        $this->ControllerName = $ControllerName;
-        $this->controllerObj = $controllerObj;
+//        $this->ControllerName = $ControllerName;
+//        $this->controllerObj = $controllerObj;
         $this->justMounted = true;
     }
     public function render()

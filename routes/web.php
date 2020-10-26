@@ -53,40 +53,41 @@ Route::middleware(['auth:sanctum', 'verified'])->get(
 )->name('me');
 
 
-// =========================== Boot Stuff  =============================================================================
-/*  Build back-end menu entries
-    This should almost definitely live somewhere else
-*/
-$isBackPage = \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isABackPage();
-if ($isBackPage) {
-    \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
-        "home",
-        [
-            'name' => __('tassy::PageGuide.FrontLinkText'),
-            "url" => "/",
-            "classes" => "",
-            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isAFrontPage(),
-        ]
-    );
 
-    \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
-        "admin",
-        [
-            'name' => __('tassy::PageGuide.AdminLinkText'),
-            "url" => "/admin",
-            "classes" => "",
-            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isAnAdminPage(),
-        ]
-    );
-
-    \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
-        "me",
-        [
-            'name' => __('tassy::PageGuide.MeLinkText'),
-            "url" => "/me",
-            "classes" => "",
-            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isAMePage(),
-
-        ]
-    );
-}
+//// =========================== Boot Stuff  =============================================================================
+///*  Build back-end menu entries
+//    This should almost definitely live somewhere else
+//*/
+//$isBackPage = \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isABackPage();
+//if ($isBackPage) {
+//    \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
+//        "home",
+//        [
+//            'name' => __('tassy::PageGuide.FrontLinkText'),
+//            "url" => "/",
+//            "classes" => "",
+//            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isAFrontPage(),
+//        ]
+//    );
+//
+//    \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
+//        "admin",
+//        [
+//            'name' => __('tassy::PageGuide.AdminLinkText'),
+//            "url" => "/admin",
+//            "classes" => "",
+//            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isAnAdminPage(),
+//        ]
+//    );
+//
+//    \TallAndSassy\PageGuide\PageGuideMenuWranglerBack::wrangleMe(
+//        "me",
+//        [
+//            'name' => __('tassy::PageGuide.MeLinkText'),
+//            "url" => "/me",
+//            "classes" => "",
+//            "routeIs" => fn () => \TallAndSassy\PageGuide\Http\Controllers\PageGuideController::isAMePage(),
+//
+//        ]
+//    );
+//}

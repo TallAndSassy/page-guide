@@ -173,7 +173,9 @@
 
             <main class="flex-1  relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
                 <div class="flex flex-col h-screen justify-between bg-gray-100">
-                    @livewire('tassy::livewire.lepage',['viewRef' => $viewRef, 'asrParams'=>$asrParams, 'ControllerName'=>$ControllerName, 'controllerObj'=>$controllerObj])
+                    @livewire('tassy::livewire.lepage', ['viewRef' => $viewRef, 'asrParams'=>$asrParams])
+{{--                    @livewire('tassy::livewire.lepage',['viewRef' => $viewRef, 'asrParams'=>$asrParams, 'ControllerName'=>$ControllerName, 'controllerObj'=>$controllerObj,'menuHtml'=>'menuGoesHere'])@livewire('tassy::livewire.lepage',['viewRef' => $viewRef, 'asrParams'=>$asrParams, 'ControllerName'=>$ControllerName, 'controllerObj'=>$controllerObj,'menuHtml'=>'menuGoesHere'])
+--}}
 {{--                    @livewire('tassy::lepage', ['pageRoute' => $pageRoute, 'asrParams'=>$asrParams])--}}
 {{--                                    Header--}}
 {{--                    <div class="h-16  flex bg-gray-100 ">--}}
