@@ -4,6 +4,7 @@ namespace TallAndSassy\PageGuide\Http\Controllers\Admin;
 
 abstract class AdminBaseController extends \Illuminate\Routing\Controller
 {
+    //abstract public static string $title = 'Dashboard';
     /* It is worth noting that LePage works differently in that it just swaps out the body.  */
 
 

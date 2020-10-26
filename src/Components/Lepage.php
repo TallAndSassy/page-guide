@@ -9,7 +9,7 @@ class Lepage extends Component
     public string $viewRef; // was pageRoute, but misnomer  Need viewRef & url
     public string $tab = 'tbd';
     public int $count = 98;
-    public string $title = 'Default Title';
+    public string $title = 'Default Title: Override with public static string $title = "My Title";';
     public string $tagline = 'For kids!';
     protected $listeners = ['pageRoute' => 'updateToPage', 'tab' => 'tab',];
     public array $asrParams = [];
@@ -64,8 +64,9 @@ class Lepage extends Component
         foreach ($this->asrParams as $key => $val) {
             $reconstructedUrl .= "/$key/$val";
         }
-         $controllerAtMethod_asString = $route->action['controller'];
+        $controllerAtMethod_asString = $route->action['controller'];
         $controllerAtMethod_asString = str_replace('getFrontView', 'getBodyView', $controllerAtMethod_asString);
+        $controllerName = substr($controllerAtMethod_asString, 0, strpos($controllerAtMethod_asString, '@'));// trim everything before '@'
         #$route = app('router')->getRoutes()->match($request->create($tailingUrl, 'GET'));
         #dd($route->action);
         #$controllerAtMethod_asString = $this->ControllerName."::getBodyView";
@@ -79,6 +80,11 @@ class Lepage extends Component
 //        $controllerAtMethod_asString = str_replace('index', 'getBodyView', $controllerAtMethod_asString);
 //        $controllerObj = \App::call($controllerObj, ['subLevels' => $reconstructedUrl]);
 //        $bodyView = $controllerObj->getBodyView();
+        $this->title = $controllerName::$title; // Error here?...
+        // Try, in your body controller, adding
+        //      public static string $title = 'My Clever Page Title';
+        // (we would have made this an abstract property in AdminBaseController, but that isn't a thing.)
+
         $bodyHtml = $bodyView->render();
 
         $blade_prefix = \TallAndSassy\PageGuide\PageGuideServiceProvider::$blade_prefix;
