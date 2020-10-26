@@ -117,7 +117,12 @@ class Lepage extends Component
         # Livewire.emit('universalHandle_butActuallyForPollingCard','10')
 
         return <<<EOD
-        x-on:click.prevent="maybeCloseAdminMenu(); urlChange('$url'); Livewire.emit('pageRoute','$url');"
+        x-on:click.prevent="
+            maybeCloseAdminMenu();
+            urlChange('$url');
+            Livewire.emit('pageRoute','$url');
+            //TODO: De-Activiate any previous page, activate this page
+            "
         href="{$url}"
         EOD;
     }
