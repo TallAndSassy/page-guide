@@ -107,14 +107,14 @@
             <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
             <!-- Static sidebar for desktop -->
             <div id="adminmenu" class="hidden md:flex flex-shrink-0">
-                <div class="flex flex-col w-64">
+                <div class="flex flex-col w-48">
                     <!-- Sidebar component, swap this element with another sidebar if you like -->
                     <div class="flex flex-col h-0 flex-1 bg-gray-800">
                         <div class="flex-1 flex flex-col pt-5  pb-4 overflow-y-auto">
                             <x-tassy::header.back.corner-block-inner class="pl-4 border-b pb-2 border-gray-700"/>
 
                             <div class="px-2">
-                                <livewire:tassy::livewire.sidenav />
+                                <livewire:tassy::livewire.sidenav  />
 {{--                                @livewire('tassy::livewire.sidenav')--}}
                             </div>
                         </div>
