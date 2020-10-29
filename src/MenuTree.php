@@ -49,6 +49,27 @@ class MenuTree # implements #\Iterator
         return $this;
     }
 
+    /* if the handle doesn't exist, push it, otherwise, continue on as no-op */
+    public function ensureTop(string $handle, string $Label, ?string $SvgHtml, ?string $IconName, ?string $urlIfNoFurtherChildren_nullIfGroup, ?string $IconSizingClasses = null): MenuTree
+    {
+        if (! isset($this->asrMenus[$handle])) {
+            $this->asrMenus[$handle] = [
+                'Label' => $Label,
+                'SvgHtml' => $SvgHtml,
+                'IconName' => $IconName,
+                'Url' => $urlIfNoFurtherChildren_nullIfGroup,
+                #'Children' => [],
+                'Handle' => $handle,
+                'EnumType' => 'Top',
+                'IconSizingClasses' => $IconSizingClasses,
+            ];
+            #$this->currentRoute = $currentRoute_short;
+            #static::$lastTopHandle = $handle;
+        }
+
+        return $this;
+    }
+
     public function pushLink(string $handle, string $Label, string $url)
     {
         $this->asrMenus[$handle] = [
