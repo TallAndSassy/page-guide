@@ -18,7 +18,8 @@
     "require": {
         "php": "^7.4",
         "illuminate/contracts": "^8.0",
-        "livewire/livewire": "^2.2"
+        "livewire/livewire": "^2.2",
+                "blade-ui-kit/blade-icons": "^0.4.5"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
