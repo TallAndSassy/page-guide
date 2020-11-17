@@ -1,5 +1,5 @@
 <div>
 
-    @include($pageRoute1234,['asrParams'=>$asrParams])
+    Default body. Try setting public string $viewRef
 {{--    -- no footer for you ----}}
 </div>
