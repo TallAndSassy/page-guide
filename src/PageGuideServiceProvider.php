@@ -6,10 +6,11 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use TallAndSassy\PageGuide\Commands\PageGuideCommand;
-use TallAndSassy\PageGuide\Components\Lepage;
 use TallAndSassy\PageGuide\Components\Lowernav;
 use TallAndSassy\PageGuide\Components\Sidenav;
 use TallAndSassy\PageGuide\Http\Controllers\PageGuideController;
+use TallAndSassy\PageGuide\Components\Lepage;
+use TallAndSassy\PageGuide\Components\LeSwappableChunk;
 
 class PageGuideServiceProvider extends ServiceProvider
 {
@@ -156,6 +157,7 @@ class PageGuideServiceProvider extends ServiceProvider
         \Livewire\Livewire::component('tassy::livewire.lowernav', Lowernav::class);
 
         \Livewire\Livewire::component('tassy::livewire.lepage',   Lepage::class);
+        \Livewire\Livewire::component('tassy::livewire.le-swappable-chunk', LeSwappableChunk::class);
         \Livewire\Livewire::component('tassy::livewire.bobby',  \TallAndSassy\PageGuide\Components\Bobby::class);
 
         \TallAndSassy\PageGuide\MenuTree::singleton('upper')->pushTop(

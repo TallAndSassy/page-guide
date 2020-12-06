@@ -20,12 +20,18 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.js" defer></script>
     </head>
     <body class="font-sans antialiased">
+     <div>
+         <div id="theOneModal_HideOnPageLoadHacks" class="hidden">                                                      {{--  x-cloak wasn't hiding the modal on pageload, as expected, so class='hidden' is here.  Yuck. HideOnPageLoadHacks--}}
+         @livewire('the-modal-box')
+         </div>
+    </div>
+
         <!-- Page Content -->
             <x-tassy::page-_base-body>
-              {{ $slot }}
+            {{ $slot }}
             </x-tassy::page-_base-body>
         @stack('modals')
-
+        @stack('TassyScripts')
         @livewireScripts
     </body>
 </html>

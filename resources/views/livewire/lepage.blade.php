@@ -1,4 +1,4 @@
-<div>
+<div src="vendor/tallandsassy/page-guide/resources/views/livewire/lepage.blade.php">
 {{-- Header--}}
 
     <div class="h-16  flex bg-gray-100 ">

@@ -1,4 +1,4 @@
-<div>
+<div src="vendor/tallandsassy/page-guide/resources/views/admin/menu.blade.php">
     @php
     // WARNING: THIS IS THE TOP MENU... MENUTREE is the SIDE MENU
         // =========================== Boot Stuff  =============================================================================

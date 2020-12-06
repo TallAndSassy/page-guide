@@ -1,4 +1,4 @@
-<div>
+<div src="vendor/tallandsassy/page-guide/resources/views/admin/menutree.blade.php">
 
     @php
 
@@ -23,7 +23,8 @@
               $IconSizingClasses_Default = 'beIconWrapper w-6 h-6';
               //$IconSizingClasses = $menuEntry['IconSizingClasses'] ? $menuEntry['IconSizingClasses'] : $IconSizingClasses_Default;
               $icon_cssClasses = "topLevelNavIcon  $placeholderFontColor_cssClasses ";
-              $jDetails_summary_cssClasses = "jDetails_summary  $divNode_cssClasses cursor-pointer";
+              $jDetails_summary_cssClasses = "jDetails_summary   cursor-pointer";
+              $jDetails_summary_subdiv_cssClasses = "  $divNode_cssClasses";
               $jDetails_body_cssClasses = 'ml-0 ';
 
 
@@ -79,6 +80,7 @@
                     <li class='{{$liWrapper_1}}'>
                         <details class="" {{$isActiveRouteUnderMe ? 'open' : ''}}>
                             <summary class="{{$jDetails_summary_cssClasses}}">
+                                <div class="FYI_subdiv_must_be_here_for_safari_Nov_20 {{$jDetails_summary_subdiv_cssClasses}}">
                                 @if (! empty($menuEntry['SvgHtml']) )
                                     {!! $menuEntry['SvgHtml'] !!}
                                 @elseif (! empty($menuEntry['IconName']) )
@@ -93,7 +95,9 @@
                                         @svg($menuEntry['IconName'],$icon_cssClasses.' '.$IconSizingClasses)
                                     </div>
                                 @endif
-                                <span class=" {{$firstLeafText_cssClasses}}">{{$menuEntry['Label']}}</span>
+
+                                <div class=" {{$firstLeafText_cssClasses}}">{{$menuEntry['Label']}}</div>
+                                </div>
                             </summary>
                             <div class="jDetails_body {{$jDetails_body_cssClasses}}">
                                 <ul>

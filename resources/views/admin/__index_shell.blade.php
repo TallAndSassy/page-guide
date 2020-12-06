@@ -1,4 +1,5 @@
 <x-tassy::page-_base>
+
     <style>
         /* Nicer Drop-Down --BEGIN- */
 
@@ -114,8 +115,8 @@
                             <x-tassy::header.back.corner-block-inner class="pl-4 border-b pb-2 border-gray-700"/>
 
                             <div class="px-2">
-                                <livewire:tassy::livewire.sidenav  />
-{{--                                @livewire('tassy::livewire.sidenav')--}}
+                                <livewire:tassy::livewire.sidenav/>
+                                {{--                                @livewire('tassy::livewire.sidenav')--}}
                             </div>
                         </div>
                         <div class="flex-shrink-0 flex  px-2 pt-1  border-t border-gray-700">
@@ -169,28 +170,55 @@
                         e.classList.add('hidden');
                     }
                 }
+
+                function closeTall2Modal() {
+
+                }
+
+
+                window.addEventListener('le-swappable-chunk-swapped', event => { //updateLePageChunkRoute
+
+                    let enumUrlType = event.detail.enumUrlType;
+                    let key = event.detail.chunkKey;
+                    let value = event.detail.chunkValue;
+                    console.log('enumUrlType_page_chunk_none(' + enumUrlType + ') with  ' +key + '/' + value);
+
+                    if (enumUrlType == 'none') {
+                        console.log(' -- so no url change');
+
+                    } else if (enumUrlType == 'updateOrAdd') {
+                        let url = window.location + '';
+                        let urlParts = url.split('/');
+                        let slotOfKey = urlParts.indexOf(key);
+                        if (slotOfKey != -1 && urlParts.length >= slotOfKey) {
+                            // Update
+                            urlParts[slotOfKey + 1] = value;
+                        } else {
+                            // Fix
+                            if (slotOfKey != -1) {
+                                urlParts.splice(slotOfKey, 1); // remove the dangling key https://stackoverflow.com/a/1345122/93933
+                            }
+                            // Add
+                            urlParts.push(key);
+                            urlParts.push(value)
+                        }
+                        console.log(urlParts);
+                        console.log(window.location);
+                        let newUrl = urlParts.join('/');
+                        console.log(' -- so tweaking url to... '+newUrl);
+
+                        console.log(' -- and just updated the browser url to: '+newUrl);
+                        history.replaceState(null, null, newUrl); //https://stackoverflow.com/a/3503206/93933
+                    } else if (eenumUrlType == 'page') {
+                        console.log(' -- so swapping url to...');
+                    }
+
+                })
             </script>
 
             <main class="flex-1  relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
                 <div class="flex flex-col h-screen justify-between bg-gray-100">
                     @livewire('tassy::livewire.lepage', ['viewRef' => $viewRef, 'asrParams'=>$asrParams])
-{{--                    @livewire('tassy::livewire.lepage',['viewRef' => $viewRef, 'asrParams'=>$asrParams, 'ControllerName'=>$ControllerName, 'controllerObj'=>$controllerObj,'menuHtml'=>'menuGoesHere'])@livewire('tassy::livewire.lepage',['viewRef' => $viewRef, 'asrParams'=>$asrParams, 'ControllerName'=>$ControllerName, 'controllerObj'=>$controllerObj,'menuHtml'=>'menuGoesHere'])
---}}
-{{--                    @livewire('tassy::lepage', ['pageRoute' => $pageRoute, 'asrParams'=>$asrParams])--}}
-{{--                                    Header--}}
-{{--                    <div class="h-16  flex bg-gray-100 ">--}}
-{{--                        <div class="hidden sm:block p-3  ">--}}
-{{--                            <x-tassy::header.back.title>{{$title}}  </x-tassy::header.back.title>--}}
-{{--                        </div>--}}
-
-{{--                        <x-tassy::header.back.menu class="lg:pt-1"/>--}}
-
-{{--                    </div>--}}
-{{--                    <x-tassy::header.back.title class="sm:hidden">{{$title}}  </x-tassy::header.back.title>--}}
-
-{{--                    <main class="mb-auto  bg-gray-100">--}}
-{{--                        <div class="p-0 sm:p-3 h-full">{{$slot}}</div>--}}
-{{--                    </main>--}}
 
                     <x-tassy::footer.back.index/>
 
